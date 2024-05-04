@@ -11,9 +11,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
+    "@astrojs/ts-plugin": "^1.6.1",
     "astro": "^4.5.12",
-    "axios": "^1.6.8",
-    "cheerio": "^1.0.0-rc.12",
     "gsap": "^3.12.5",
     "typescript": "^5.4.3"
   }
