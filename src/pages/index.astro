@@ -36,11 +36,37 @@ const getLiveStreamLink = async () => {
 }
 
 // const response  = await getLiveStreamLink();
+
+
+// gsap code here!
+/*
+Setup: wrap your content <div> in another <div> that will serve as the viewport.
+Call this function FIRST (before you create your ScrollTriggers); it sets the
+default "scroller" for you (otherwise it'd be the window/body, but it should be
+the content <div>)
+*/
+// smoothScroll("#content");
+
+// pin each box for 300px when they hit the top
+// gsap.utils.toArray(".box").forEach(box => {
+//     ScrollTrigger.create({
+//         trigger: box,
+//         pin: true,
+//         start: "top top",
+//         end: "+=300"
+//     });
+// });
+const sections = await Astro.glob('../pages/sections/*.md')
 ---
 <style>
     .navbar .logo-image img {
         width: auto;
         height: 64px;
+    }
+    .gs_reveal {
+        opacity: 0;
+        visibility: hidden;
+        will-change: transform, opacity;
     }
 </style>
 
@@ -77,7 +103,6 @@ const getLiveStreamLink = async () => {
     <link rel="icon" href="yavin/images/favicon.png">
 </head>
 <body>
-
     <!-- Navigation -->
     <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
         <div class="container">
@@ -88,9 +113,9 @@ const getLiveStreamLink = async () => {
             <!-- Text Logo - Use this if you don't have a graphic logo -->
             <!-- <a class="navbar-brand logo-text" href="index.html">Yavin</a> -->
 
-            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+            <!--<button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button>-->
 
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
@@ -153,48 +178,13 @@ const getLiveStreamLink = async () => {
     </header> <!-- end of header -->
     <!-- end of header -->
 
-
-    <!-- Statistics -->
-    <!--<div class="counter">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-
-                    &lt;!&ndash; Counter &ndash;&gt;
-                    <div class="counter-container">
-                        <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="231" data-purecounter-duration="3" class="purecounter">1</div>
-                            <div class="counter-info">Happy Customers</div>
-                        </div> &lt;!&ndash; end of counter-cell &ndash;&gt;
-                        <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="385" data-purecounter-duration="1.5" class="purecounter">1</div>
-                            <div class="counter-info">Issues Solved</div>
-                        </div> &lt;!&ndash; end of counter-cell &ndash;&gt;
-                        <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="159" data-purecounter-duration="3" class="purecounter">1</div>
-                            <div class="counter-info">Good Reviews</div>
-                        </div> &lt;!&ndash; end of counter-cell &ndash;&gt;
-                        <div class="counter-cell">
-                            <div data-purecounter-start="0" data-purecounter-end="128" data-purecounter-duration="3" class="purecounter">1</div>
-                            <div class="counter-info">Case Studies</div>
-                        </div> &lt;!&ndash; end of counter-cell &ndash;&gt;
-                    </div> &lt;!&ndash; end of counter-container &ndash;&gt;
-                    &lt;!&ndash; end of counter &ndash;&gt;
-
-                </div> &lt;!&ndash; end of col &ndash;&gt;
-            </div> &lt;!&ndash; end of row &ndash;&gt;
-        </div> &lt;!&ndash; end of container &ndash;&gt;
-    </div> --><!-- end of counter -->
-    <!-- end of statistics -->
-
-
     <!-- Introduction -->
-    <div id="introduction" class="basic-1 bg-gray">
+    <div id="introduction" class="section basic-1 bg-gray">
         <div class="container">
             <div class="row">
                 <div class="col-xl-9">
-                    <h2>¡Damos-lhe as boas-vindas à nossa comunidade!</h2>
-                    <p>Na nossa igreja, unimo-nos para viver de acordo com o propósito que Deus nos deu: partilhar o amor de Cristo e fazer discípulos de todas as nações, como nos é ensinado em Mateus 28:19-20. Aqui encontrarás um lugar para crescer na tua relação com Deus, conectar-te com outros crentes e servir o nosso próximo com humildade e compaixão. Esperamos que te sintas em casa e encontres inspiração para o teu caminho de fé!</p>
+                    <h2>{sections[0].frontmatter.title}</h2>
+                    <p>{sections[0].frontmatter.text}</p>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
@@ -203,23 +193,23 @@ const getLiveStreamLink = async () => {
 
 
     <!-- Details 1 -->
-    <div id="details" class="basic-2">
+    <div id="details" class="section basic-2">
         <img class="decoration-star" src="yavin/images/decoration-star.svg" alt="alternative">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-xl-5">
+                <div class="col-lg-6 col-xl-5 gs_reveal gs_reveal_fromLeft">
                     <div class="image-container">
                         <img class="img-fluid" src="yavin/images/details-1.png" alt="alternative" style="-webkit-border-radius: 9px;
-border-radius: 9px;
-border-top-right-radius: 100px;
-box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
-">
+                            border-radius: 9px;
+                            border-top-right-radius: 100px;
+                            box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
+                            ">
                     </div> <!-- end of image-container -->
                 </div> <!-- end of col -->
-                <div class="col-lg-6 col-xl-7">
+                <div class="col-lg-6 col-xl-7 ">
                     <div class="text-container">
-                        <h2>Junte-se a nós na Adoração neste Domingo!</h2>
-                        <p>Convidamos você para o nosso culto principal de domingo, um momento especial dedicado à adoração em conjunto, receber ensinamentos bíblicos inspiradores e experimentar a presença de Deus em comunidade. Venha fazer parte dessa experiência transformadora enquanto crescemos juntos em fé e comunhão. Esperamos vê-lo lá!</p>
+                        <h2 class="gs_reveal">Junte-se a nós na Adoração neste Domingo!</h2>
+                        <p  class="gs_reveal">Convidamos você para o nosso culto principal de domingo, um momento especial dedicado à adoração em conjunto, receber ensinamentos bíblicos inspiradores e experimentar a presença de Deus em comunidade. Venha fazer parte dessa experiência transformadora enquanto crescemos juntos em fé e comunhão. Esperamos vê-lo lá!</p>
                         <!--<ul class="list-unstyled li-space-lg">
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
@@ -250,7 +240,7 @@ box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
 
 
     <!-- Services -->
-    <div id="services" class="cards-1 bg-gray">
+    <div id="services" class="section cards-1 bg-gray">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
@@ -353,24 +343,23 @@ box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
 
 
     <!-- Details 2 -->
-    <div class="basic-3">
+    <div class="section basic-3">
         <img class="decoration-star" src="yavin/images/decoration-star.svg" alt="alternative">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-xl-7">
                     <div class="text-container">
-                        <h2>¡Junte-se ao nosso Pequeno Grupo (PG) e cresça em comunidade!</h2>
-                        <p>Nossos Pequenos Grupos são lugares onde você pode se conectar com outros crentes e explorar juntos a Palavra de Deus em um ambiente acolhedor e amigável. Não importa em que estágio da sua jornada espiritual você esteja, todos são bem-vindos! Venha experimentar a camaradagem, o apoio mútuo e o crescimento espiritual enquanto nos envolvemos em conversas significativas e estudamos a Bíblia juntos. Esperamos por você de braços abertos!</p>
+                        <h2 class="gs_reveal">¡Junte-se ao nosso Pequeno Grupo (PG) e cresça em comunidade!</h2>
+                        <p class="gs_reveal">Nossos Pequenos Grupos são lugares onde você pode se conectar com outros crentes e explorar juntos a Palavra de Deus em um ambiente acolhedor e amigável. Não importa em que estágio da sua jornada espiritual você esteja, todos são bem-vindos! Venha experimentar a camaradagem, o apoio mútuo e o crescimento espiritual enquanto nos envolvemos em conversas significativas e estudamos a Bíblia juntos. Esperamos por você de braços abertos!</p>
                         <!--<a class="btn-solid-reg" href="article.html">Get started</a>-->
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
-                <div class="col-lg-6 col-xl-5">
+                <div class="col-lg-6 col-xl-5  gs_reveal gs_reveal_fromRight">
                     <div class="image-container">
                         <img class="img-fluid" src="yavin/images/details-2.png" alt="alternative" style="
-
-border-radius: 9px;
-border-top-right-radius: 100px;
-box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
+                            border-radius: 9px;
+                            border-top-right-radius: 100px;
+                            box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
                         ">
                     </div> <!-- end of image-container -->
                 </div> <!-- end of col -->
@@ -381,7 +370,7 @@ box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
 
 
     <!-- Invitation -->
-    <div class="basic-4 bg-gray">
+    <div class="section basic-4 bg-gray">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -395,7 +384,7 @@ box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
 
 
     <!-- Projects -->
-    <div id="projects" class="cards-2">
+    <div id="projects" class="section cards-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -483,105 +472,9 @@ box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
     <!-- end of projects -->
 
 
-    <!-- Testimonials -->
-    <!--<div class="slider-1 bg-gray">-->
-    <!--    <img class="quotes-decoration" src="yavin/images/quotes.svg" alt="alternative">-->
-    <!--    <div class="container">-->
-    <!--        <div class="row">-->
-    <!--            <div class="col-lg-12">-->
-
-    <!--                &lt;!&ndash; Card Slider &ndash;&gt;-->
-    <!--                <div class="slider-container">-->
-    <!--                    <div class="swiper-container card-slider">-->
-    <!--                        <div class="swiper-wrapper">-->
-
-    <!--                            &lt;!&ndash; Slide &ndash;&gt;-->
-    <!--                            <div class="swiper-slide">-->
-    <!--                                <img class="testimonial-image" src="images/testimonial-1.jpg" alt="alternative">-->
-    <!--                                <p class="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p>-->
-    <!--                                <div class="testimonial-author">Marlene Visconte</div>-->
-    <!--                                <div class="testimonial-position">General Manager - Scouter</div>-->
-    <!--                            </div> &lt;!&ndash; end of swiper-slide &ndash;&gt;-->
-    <!--                            &lt;!&ndash; end of slide &ndash;&gt;-->
-
-    <!--                            &lt;!&ndash; Slide &ndash;&gt;-->
-    <!--                            <div class="swiper-slide">-->
-    <!--                                <img class="testimonial-image" src="images/testimonial-2.jpg" alt="alternative">-->
-    <!--                                <p class="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p>-->
-    <!--                                <div class="testimonial-author">John Spiker</div>-->
-    <!--                                <div class="testimonial-position">Team Leader - Vanquish</div>-->
-    <!--                            </div> &lt;!&ndash; end of swiper-slide &ndash;&gt;-->
-    <!--                            &lt;!&ndash; end of slide &ndash;&gt;-->
-
-    <!--                            &lt;!&ndash; Slide &ndash;&gt;-->
-    <!--                            <div class="swiper-slide">-->
-    <!--                                <img class="testimonial-image" src="images/testimonial-3.jpg" alt="alternative">-->
-    <!--                                <p class="testimonial-text">“Expense bed any sister depend changer off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it how about some words here done”</p>-->
-    <!--                                <div class="testimonial-author">Stella Virtuoso</div>-->
-    <!--                                <div class="testimonial-position">Design Chief - Bikegirl</div>-->
-    <!--                            </div> &lt;!&ndash; end of swiper-slide &ndash;&gt;-->
-    <!--                            &lt;!&ndash; end of slide &ndash;&gt;-->
-
-    <!--                        </div> &lt;!&ndash; end of swiper-wrapper &ndash;&gt;-->
-
-    <!--                        &lt;!&ndash; Add Arrows &ndash;&gt;-->
-    <!--                        <div class="swiper-button-next"></div>-->
-    <!--                        <div class="swiper-button-prev"></div>-->
-    <!--                        &lt;!&ndash; end of add arrows &ndash;&gt;-->
-
-    <!--                    </div> &lt;!&ndash; end of swiper-container &ndash;&gt;-->
-    <!--                </div> &lt;!&ndash; end of slider-container &ndash;&gt;-->
-    <!--                &lt;!&ndash; end of card slider &ndash;&gt;-->
-
-    <!--            </div> &lt;!&ndash; end of col &ndash;&gt;-->
-    <!--        </div> &lt;!&ndash; end of row &ndash;&gt;-->
-    <!--    </div> &lt;!&ndash; end of container &ndash;&gt;-->
-    <!--</div> &lt;!&ndash; end of slider-1 &ndash;&gt;-->
-    <!-- end of testimonials -->
-
-
-    <!-- Contact -->
-    <!--<div id="contact" class="form-1">-->
-    <!--    <img class="decoration-star" src="images/decoration-star.svg" alt="alternative">-->
-    <!--    <img class="decoration-star-2" src="images/decoration-star.svg" alt="alternative">-->
-    <!--    <div class="container">-->
-    <!--        <div class="row">-->
-    <!--            <div class="col-lg-6">-->
-    <!--                <div class="image-container">-->
-    <!--                    <img class="img-fluid" src="images/contact.png" alt="alternative">-->
-    <!--                </div> &lt;!&ndash; end of image-container &ndash;&gt;-->
-    <!--            </div> &lt;!&ndash; end of col &ndash;&gt;-->
-    <!--            <div class="col-lg-6">-->
-    <!--                <div class="text-container">-->
-    <!--                    <h2>Contact us for a quote using the following form</h2>-->
-
-    <!--                    &lt;!&ndash; Contact Form &ndash;&gt;-->
-    <!--                    <form>-->
-    <!--                        <div class="form-group">-->
-    <!--                            <input type="text" class="form-control-input" placeholder="Name" required>-->
-    <!--                        </div>-->
-    <!--                        <div class="form-group">-->
-    <!--                            <input type="email" class="form-control-input" placeholder="Email" required>-->
-    <!--                        </div>-->
-    <!--                        <div class="form-group">-->
-    <!--                            <textarea class="form-control-textarea" placeholder="Message" required></textarea>-->
-    <!--                        </div>-->
-    <!--                        <div class="form-group">-->
-    <!--                            <button type="submit" class="form-control-submit-button">Submit</button>-->
-    <!--                        </div>-->
-    <!--                    </form>-->
-    <!--                    &lt;!&ndash; end of contact form &ndash;&gt;-->
-    <!--                </div> &lt;!&ndash; end of text-container &ndash;&gt;-->
-    <!--            </div> &lt;!&ndash; end of col &ndash;&gt;-->
-    <!--        </div> &lt;!&ndash; end of row &ndash;&gt;-->
-    <!--    </div> &lt;!&ndash; end of container &ndash;&gt;-->
-    <!--</div> &lt;!&ndash; end of form-1 &ndash;&gt;-->
-    <!-- end of contact -->
-
-
     <!-- Footer -->
 
-    <div class="container-fluid footer bg-gray">
+    <div class="section container-fluid footer bg-gray">
         <div class="container">
             <footer class="">
                 <div class="row">
@@ -656,9 +549,6 @@ box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
     <!-- end of footer -->
 
 
-
-
-
     <!-- Back To Top Button -->
     <button onclick="topFunction()" id="myBtn">
         <img src="yavin/images/up-arrow.png" alt="alternative">
@@ -670,5 +560,55 @@ box-shadow: -15px 15px 0px 0px rgba(239,242,247,1);
     <script src="/yavin/js/swiper.min.js" is:inline></script> <!-- Swiper for image and text sliders -->
     <script src="/yavin/js/purecounter.min.js" is:inline></script> <!-- Purecounter counter for statistics numbers -->
     <script src="/yavin/js/scripts.js" is:inline></script> <!-- Custom scripts -->
+
+    <script>
+        import gsap  from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        function animateFrom(elem, direction) {
+            direction = direction || 1;
+            var x = 0,
+                y = direction * 100;
+            if(elem.classList.contains("gs_reveal_fromLeft")) {
+                x = -100;
+                y = 0;
+            } else if (elem.classList.contains("gs_reveal_fromRight")) {
+                x = 100;
+                y = 0;
+            }
+            elem.style.transform = "translate(" + x + "px, " + y + "px)";
+            elem.style.opacity = "0";
+            gsap.fromTo(elem, {x: x, y: y, autoAlpha: 0}, {
+                duration: 1.25,
+                x: 0,
+                y: 0,
+                autoAlpha: 1,
+                ease: "expo",
+                overwrite: "auto"
+            });
+        }
+
+        function hide(elem) {
+            gsap.set(elem, {autoAlpha: 0});
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            gsap.utils.toArray(".gs_reveal").forEach(function(elem) {
+                hide(elem); // assure that the element is hidden when scrolled into view
+
+                ScrollTrigger.create({
+                    trigger: elem,
+                    markers: false,
+                    onEnter: function() { animateFrom(elem) },
+                    onEnterBack: function() { animateFrom(elem, -1) },
+                    onLeave: function() { hide(elem) } // assure that the element is hidden when scrolled into view
+                });
+            });
+        });
+
+    </script>
 </body>
 </html>
